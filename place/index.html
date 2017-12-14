@@ -239,13 +239,19 @@
 		var costs_obtaining = document.getElementById('checkbox').checked;
 		costs_obtaining = costsObtaining(costs_obtaining, costs_obtaining_out_city, costs_obtaining_in_city);	
 		if(!isNaN(pension_brutto)){ 
-			var worker = new workerConstructor(pension_brutto,costs_obtaining);
+			if (pension_brutto>=2100) {
+				var worker = new workerConstructor(pension_brutto,costs_obtaining);
+				addValues(worker);	
+				showElements(index);
+			}	
+			else{
+				alert('Minimalna krajowa to 2100 zł brutto, wpisz poprawną wartość!');
+			}
 		}
 		else{
 			alert("Wpisz liczbę, nie można zarabiać liter!");
 		}
-		addValues(worker);	
-		showElements(index);
+		
 	});
 
 
