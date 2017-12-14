@@ -39,18 +39,22 @@ label{
 	font-size: 1.4em;
 }
 button{
-	background-color: rgba(153, 51, 153,0.75);
+	background-color: rgba(153, 51, 153,0.70);
   -webkit-border-radius: 10;
   -moz-border-radius: 10;
   border-radius: 10px;
   font-family: Arial;
+  font-weight: bold;
   color: #ffffff;
   font-size: 20px;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
-  opacity: 0.85;
+
   margin-top: 10px;
   width: 250px;	
+  border-style: solid;
+  border-width: 2px;
+  border-color: white;
 
 }
 div.row{
@@ -66,11 +70,17 @@ div.row{
   text-decoration: none;
   opacity: 0.85;
   margin-top: 10px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: white;
 }
 div.cell{
 	width: 50%;
-	padding-left: 10px;
+	padding-left: 30px;
 
+}
+div.value{
+	text-align: center;
 }
 footer{
 	width: 100%;
