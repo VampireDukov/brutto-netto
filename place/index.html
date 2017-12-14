@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Brutto - netto</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="styles/css.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+	<header>
+		<h1>Brutto - netto</h1>
+	</header>
+<section id="form">
+	<div class="container form">
+		<form id="input_form" name="input_form" action="#">
+			<label><input id="pension_brutto" type="text" name="worker" value="Płaca podstawowa"></label>
+			<br>
+			<label>Pracownik dojeżdża do miejsca pracy:<input id='checkbox' type="checkbox" ></label>
+			<br>
+			<button id="submit">Wyślij</button>
+		</form>
+	</div>	
+	
+</section>
+<section id="content">
+	<div class="container">
+		<div class="row">
+			<div class="cell"><span class="title">Przychód brutto</span></div>
+			<div class="cell"><span class="value"></span></div>
+		</div>
+		<div class="row">
+			<div class="cell"><span class="title">Przychód netto</span></div>
+			<div class="cell"><span class="value"></span></div>
+		</div>
+		<div class="row">
+			<div class="cell"><span class="title">Ubezpieczenie emerytalne</span></div>
+			<div class="cell"><span class="value"></span></div>
+		</div>
+		<div class="row">
+			<div class="cell"><span class="title">Ubezpieczenie rentowe</span></div>
+			<div class="cell"><span class="value"></span></div>
+		</div>
+		<div class="row">
+			<div class="cell"><span class="title">Ubezpieczenie chorobowe</span></div>
+			<div class="cell"><span class="value"></span></div>
+		</div>
+		<div class="row">
+			<div class="cell"><span class="title">Razem składki ubezpieczniowe</span></div>
+			<div class="cell"><span class="value"></span></div>
+		</div>
+		<div class="row">
+			<div class="cell"><span class="title">Koszta uzyskania przychodu</span></div>
+			<div class="cell"><span class="value"></span></div>
+		</div>
+		<div class="row">
+			<div class="cell"><span class="title">Podstawa wymiaru składek ubezpieczenia zdrowotnego</span></div>
+			<div class="cell"><span class="value"></span></div>
+		</div>
+		<div class="row">
+			<div class="cell"><span class="title">Podstawa naliczenia podatku dochodowego</span></div>
+			<div class="cell"><span class="value"></span></div>
+		</div>
+		<div class="row">
+			<div class="cell"><span class="title">Potrącona zaliczka na podatek dochodowy</span></div>
+			<div class="cell"><span class="value"></span></div>
+		</div>
+		<div class="row">
+			<div class="cell"><span class="title">Potrącona składka 9%</span></div>
+			<div class="cell"><span class="value"></span></div>
+		</div>
+		<div class="row">
+			<div class="cell"><span class="title">Potrącona składka 7,75%</span></div>
+			<div class="cell"><span class="value"></span></div>
+		</div>
+		<div class="row">
+			<div class="cell"><span class="title">Należna zaliczka na podatek dochodowy</span></div>
+			<div class="cell"><span class="value"></span></div>
+		</div>
+		<div class="row">
+			<footer>
+				<p>Stworzone przez Adam Jambor ajjambor912@gmail.com<p>
+			</footer>
+		</div>
+	</div>
+</section>
+
+<script type="text/javascript">
+	
+	const pension_contr = 0.0976;
+	const disability_ins = 0.015;
+	const medical_ins = 0.0245;
+	const tax = 0.18;
+	const relief = 46.33;
+	const healthy = 0.09;
+	const healthy_2 = 0.0775;
+
+	const costs_obtaining_in_city = 111.25;
+	const costs_obtaining_out_city = 139.06;
+	//powpisywać prawdziwe tytłu
+	const titles =[1,2,3,4,5,6,7,8,9,1,2,32,43,4543,45,3,];
+
+	const submit = document.getElementById('submit');
+
+
+	var index = 0;
+
+
+	function costsObtaining(checkbox, costs_obtaining_out_city, costs_obtaining_in_city){
+
+		if(checkbox===true) {
+
+			return costs_obtaining_out_city;
+
+		}
+		else{
+
+			return costs_obtaining_in_city;
+
+		}
+	
+	}
+	
+	
+	function Round(n, k){
+
+		var factor = Math.pow(10, k);
+		return Math.round(n*factor)/factor;
+
+	}
+
+	function workerConstructor(salary_brutto, costs_obtaining) {
+		
+	
+		this.salary_brutto = salary_brutto; 
+		this.costs_obtaining = costs_obtaining;
+
+		
+		
+		
+		this.pension_insurance = function(){
+
+			return Round(this.salary_brutto*pension_contr,2);
+		
+		}
+
+		this.disability_insurance = function(){
+
+			return Round(this.salary_brutto*disability_ins,2);
+		
+		}
+
+		this.medical_insurance = function(){
+
+			return Round(this.salary_brutto*medical_ins,2);
+		
+		}
+
+		this.result_dues= function(){
+
+			return Round(this.medical_insurance() + this.disability_insurance() + this.pension_insurance(),2);
+		
+		};
+
+		this.basis_calc_contr = function(){
+
+			return Round(this.salary_brutto - this.result_dues(),2);
+		
+		}
+
+		this.income_tax = function(){
+
+			return Round(this.salary_brutto - this.result_dues() - this.costs_obtaining,2);
+		}
+
+		this.advance_tax = function(){
+
+			return Round(this.income_tax() * tax - relief,0); 
+		}
+		this.down_paymnt = function(){
+
+			return Round(this.basis_calc_contr() * healthy,2); //9% nie wiem co to
+		
+		}
+		this.ded_from_tax = function(){
+
+			return Round(this.basis_calc_contr() * healthy_2,2); //7,75% nie wiem co to
+		}
+		this.due_advance_tax = function(){
+
+			return Round(this.advance_tax() - this.ded_from_tax(),2); 
+		}
+		this.result = function(){
+
+			return Round(this.salary_brutto - this.result_dues() - this.down_paymnt() - this.due_advance_tax(),2);
+		}
+
+	}
+
+	
+	function addValues(worker){
+
+		var cells = document.getElementsByClassName('value');
+		cells[0].textContent = worker.salary_brutto;
+		cells[1].textContent = worker.result();
+		cells[2].textContent = worker.pension_insurance();
+		cells[3].textContent = worker.disability_insurance();
+		cells[4].textContent = worker.medical_insurance();
+		cells[5].textContent = worker.result_dues();
+		cells[6].textContent = worker.costs_obtaining;
+		cells[7].textContent = worker.basis_calc_contr();
+		cells[8].textContent = worker.income_tax();
+		cells[9].textContent = worker.advance_tax();
+		cells[10].textContent = worker.down_paymnt();
+		cells[11].textContent = worker.ded_from_tax();
+		cells[12].textContent = worker.due_advance_tax()
+		
+		
+
+	}
+	function showElements(index){
+
+		var rows = document.getElementsByClassName('row');
+		$(rows[index]).slideDown(500);
+		$(rows[index]).css('display','flex');
+		
+		index = index + 1;
+		if (index < rows.length) {
+		
+			
+			showElements(index);
+		}
+	
+	}
+	submit.addEventListener('click', function(event){
+		event.preventDefault()
+
+		var pension_brutto = document.getElementById('pension_brutto').value;
+		// koszta dojazdu
+		var costs_obtaining = document.getElementById('checkbox').checked;
+		costs_obtaining = costsObtaining(costs_obtaining, costs_obtaining_out_city, costs_obtaining_in_city);	
+		if(!isNaN(pension_brutto)){ 
+			var worker = new workerConstructor(pension_brutto,costs_obtaining);
+		}
+		else{
+			alert("Wpisz liczbę, nie można zarabiać liter!");
+		}
+		addValues(worker);	
+		showElements(index);
+	});
+
+
+	
+</script>
+</body>
+</html>

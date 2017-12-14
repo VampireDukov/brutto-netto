@@ -1,0 +1,84 @@
+body,html{
+	margin: 0;
+	padding: 0;
+	max-width: 1200px;
+	margin: auto;
+}
+html{
+
+    background-image: url('../bg.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    color: white;
+}
+h1{
+	padding-top: 15px;
+	padding-bottom: 15px;
+	text-align: center;
+	background-color: rgba(0,0,0,0.6);
+	display: block;
+	margin-top: auto;
+}
+div.container{
+	width: 70%;
+	margin: auto;
+}
+.form{
+	text-align: center;
+}
+input{
+
+	font-size: 1em;
+	padding: 5px 10px 5px 10px;
+	color: rgb(153, 51, 153);
+	text-align: center;
+	border-radius: 10px;
+}
+label{
+	font-size: 1.4em;
+}
+button{
+	background-color: rgba(153, 51, 153,0.75);
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 10px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  opacity: 0.85;
+  margin-top: 10px;
+  width: 250px;	
+
+}
+div.row{
+	display: none;
+	background-color: rgba(153, 51, 153,0.75);
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 10px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  opacity: 0.85;
+  margin-top: 10px;
+}
+div.cell{
+	width: 50%;
+	padding-left: 10px;
+
+}
+footer{
+	width: 100%;
+}
+p{
+
+	text-align: center;
+	font-size: 0.75em;
+	font-weight: bold;
+}
+
