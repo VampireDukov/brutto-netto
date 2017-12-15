@@ -14,7 +14,7 @@
 	<div class="container form">
 		<form id="input_form" name="input_form" action="#">
 			<label><input id="pension_brutto" type="text" name="worker" value="Twoja pensja brutto"></label>
-			<br>
+			<br><br>
 			<label>Pracownik dojeżdża do miejsca pracy:<input id='checkbox' type="checkbox" ></label>
 			<br>
 			<button id="submit">Przelicz</button>
@@ -100,7 +100,7 @@
 	const titles =[1,2,3,4,5,6,7,8,9,1,2,32,43,4543,45,3,];
 
 	const submit = document.getElementById('submit');
-
+	
 
 	var index = 0;
 
@@ -217,9 +217,13 @@
 		
 
 	}
+
+	var check_visible_elements = false;
+
 	function showElements(index){
 
 		var rows = document.getElementsByClassName('row');
+		$(rows[index]).css("border-width","2px");
 		$(rows[index]).slideDown(500);
 		$(rows[index]).css('display','flex');
 		
@@ -229,7 +233,29 @@
 			
 			showElements(index);
 		}
+		else{
+			index = 0;
+			check_visible_elements = true;
+		}
 	
+	}
+
+	function hideElements(index){
+
+		var rows = document.getElementsByClassName('row');
+		$(rows[index]).slideUp(500);
+		$(rows[index]).css("border-width" , "1px");
+		index = index + 1;
+		if (index < rows.length) {
+		
+			
+			hideElements(index);
+		}
+		else{
+			index = 0;
+
+		}
+
 	}
 	submit.addEventListener('click', function(event){
 		event.preventDefault()
@@ -242,7 +268,16 @@
 			if (pension_brutto>=2100) {
 				var worker = new workerConstructor(pension_brutto,costs_obtaining);
 				addValues(worker);	
-				showElements(index);
+				if (check_visible_elements === false) {
+
+					showElements(index);
+				}
+				else{
+					hideElements(index);
+					setTimeout(function(){
+						showElements(index);
+					},500);
+				}	
 			}	
 			else{
 				alert('Minimalna krajowa to 2100 zł brutto, wpisz poprawną wartość!');
