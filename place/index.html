@@ -214,6 +214,10 @@
 		cells[11].textContent = worker.ded_from_tax();
 		cells[12].textContent = worker.due_advance_tax()
 		
+		for(var i = 0;i<cells.length;i++){
+
+			cells[i].textContent = cells[i].textContent.replace('.',',');
+		}
 		
 
 	}
@@ -259,9 +263,9 @@
 	}
 	submit.addEventListener('click', function(event){
 		event.preventDefault()
-
+		
 		var pension_brutto = document.getElementById('pension_brutto').value;
-		// koszta dojazdu
+		pension_brutto = pension_brutto.replace(',','.');
 		var costs_obtaining = document.getElementById('checkbox').checked;
 		costs_obtaining = costsObtaining(costs_obtaining, costs_obtaining_out_city, costs_obtaining_in_city);	
 		if(!isNaN(pension_brutto)){ 
