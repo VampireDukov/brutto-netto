@@ -59,7 +59,14 @@ button{
   margin-bottom: 45px;
 
 }
+@media screen and (min-width: 1200px) {
+
+  div.row{
+    height: 23px;
+  }
+}
 div.row{
+  
 	display: none;
 	background-color: rgba(153, 51, 153,0.75);
   -webkit-border-radius: 10;
@@ -77,12 +84,13 @@ div.row{
   border-color: white;
 }
 div.cell{
-	width: 50%;
+	width: 70%;
 	padding-left: 30px;
 
 }
 div.value{
 	text-align: center;
+  width: 30%;
 }
 footer{
 	width: 100%;
