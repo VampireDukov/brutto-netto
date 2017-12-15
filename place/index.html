@@ -78,10 +78,14 @@
 		</div>
 		<div class="row footer">
 			<footer>
-				<p>Stworzone przez Adam Jambor ajjambor912@gmail.com<p>
+				<span>Stworzone przez Adam Jambor ajjambor912@gmail.com</span>
 			</footer>
 		</div>
+		
+			
+		
 	</div>
+
 </section>
 
 <script type="text/javascript">
@@ -120,10 +124,6 @@
 	
 	}
 	
-	function delVal(input){
-
-		input.value = '';
-	}
 
 	function Round(n, k){
 
@@ -240,7 +240,7 @@
 		
 			setTimeout(function(){
 				showElements(index);	
-			},400);
+			},250);
 				
 		}
 		else{
@@ -300,7 +300,16 @@
 	});
 	input.addEventListener('focus', function(){
 
-		delVal(input);
+		input.value = '';
+		input.classList.remove('blur');
+		input.classList.add('focus');
+	
+	});
+	input.addEventListener('blur', function(){
+
+		input.classList.remove('focus');
+		input.classList.add('blur');
+
 	});
 
 

@@ -31,9 +31,20 @@ input{
 
 	font-size: 1em;
 	padding: 5px 10px 5px 10px;
-	color: rgb(153, 51, 153);
 	text-align: center;
 	border-radius: 10px;
+  color: rgb(153, 51, 153);
+  font-weight: bold;
+
+}
+input.focus{
+
+  background-color: rgba(153, 51, 153,0.75);
+  color: white;
+}
+input.blur{
+  background-color: white;
+  color: rgb(153, 51, 153);
 }
 label{
 	font-size: 1.4em;
@@ -91,14 +102,15 @@ div.cell{
 div.value{
 	text-align: center;
   width: 30%;
-}
-footer{
-	width: 100%;
-}
-p{
 
-	text-align: center;
-	font-size: 0.75em;
-	font-weight: bold;
 }
+
+footer{
+  width: 100%;
+  padding-bottom: 3px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.75em;
+}
+
 
