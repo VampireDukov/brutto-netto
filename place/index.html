@@ -76,7 +76,7 @@
 			<div class="cell"><span class="title">Należna zaliczka na podatek dochodowy</span></div>
 			<div class="cell value""><span class="value"></span></div>
 		</div>
-		<div class="row">
+		<div class="row footer">
 			<footer>
 				<p>Stworzone przez Adam Jambor ajjambor912@gmail.com<p>
 			</footer>
@@ -100,10 +100,10 @@
 	const titles =[1,2,3,4,5,6,7,8,9,1,2,32,43,4543,45,3,];
 
 	const submit = document.getElementById('submit');
-	
+	const input = document.getElementById('pension_brutto');
 
 	var index = 0;
-
+	const rows = document.getElementsByClassName('row');
 
 	function costsObtaining(checkbox, costs_obtaining_out_city, costs_obtaining_in_city){
 
@@ -120,7 +120,11 @@
 	
 	}
 	
-	
+	function delVal(input){
+
+		input.value = '';
+	}
+
 	function Round(n, k){
 
 		var factor = Math.pow(10, k);
@@ -226,16 +230,18 @@
 
 	function showElements(index){
 
-		var rows = document.getElementsByClassName('row');
+		
 		$(rows[index]).css("border-width","2px");
-		$(rows[index]).slideDown(500);
+		$(rows[index]).slideDown(400);
 		$(rows[index]).css('display','flex');
 		
 		index = index + 1;
 		if (index < rows.length) {
 		
-			
-			showElements(index);
+			setTimeout(function(){
+				showElements(index);	
+			},400);
+				
 		}
 		else{
 			index = 0;
@@ -246,8 +252,8 @@
 
 	function hideElements(index){
 
-		var rows = document.getElementsByClassName('row');
-		$(rows[index]).slideUp(500);
+		
+		$(rows[index]).slideUp(400);
 		$(rows[index]).css("border-width" , "1px");
 		index = index + 1;
 		if (index < rows.length) {
@@ -291,6 +297,10 @@
 			alert("Wpisz liczbę, nie można zarabiać liter!");
 		}
 		
+	});
+	input.addEventListener('focus', function(){
+
+		delVal(input);
 	});
 
 
