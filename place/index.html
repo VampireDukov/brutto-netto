@@ -204,19 +204,23 @@
 	function addValues(worker){
 
 		var cells = document.getElementsByClassName('value');
-		cells[0].textContent = worker.salary_brutto;
-		cells[1].textContent = worker.result();
-		cells[2].textContent = worker.pension_insurance();
-		cells[3].textContent = worker.disability_insurance();
-		cells[4].textContent = worker.medical_insurance();
-		cells[5].textContent = worker.result_dues();
-		cells[6].textContent = worker.costs_obtaining;
-		cells[7].textContent = worker.basis_calc_contr();
-		cells[8].textContent = worker.income_tax();
-		cells[9].textContent = worker.advance_tax();
-		cells[10].textContent = worker.down_paymnt();
-		cells[11].textContent = worker.ded_from_tax();
-		cells[12].textContent = worker.due_advance_tax()
+		var i = 0;
+		for (p in worker){
+			 if (worker.hasOwnProperty(p)) {
+				if (typeof worker[p] !='function') {
+
+					cells[i].textContent = worker[p]; 
+					i++;
+			
+				}
+				else{
+
+					cells[i].textContent = worker[p]();
+					i++;
+				}
+			}
+		}
+		
 		
 		for(var i = 0;i<cells.length;i++){
 
